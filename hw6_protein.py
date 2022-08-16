@@ -17,7 +17,11 @@ Parameters: str
 Returns: str
 '''
 def readFile(filename):
-    return
+    file = open(filename,'r')
+    lines = file.read()
+    text = lines.replace("\n","")
+    print(len(text))
+    return text
 
 
 '''
@@ -26,8 +30,22 @@ dnaToRna(dna, startIndex)
 Parameters: str ; int
 Returns: list of strs
 '''
-def dnaToRna(dna, startIndex):
-    return
+def dnaToRna(dna, startIndex):    
+    dna = dna.replace("T","U")
+    dna = dna[startIndex:]
+    codons = []
+    codon = ""
+    ends = ["UAA", "UAG", "UGA"]
+    for i in dna:
+        codon += i
+        if len(codon)==3:
+            codons.append(codon)
+            if codon in ends:
+                break
+            else:
+                codon = ""                
+    # print(codons)    
+    return codons
 
 
 '''
