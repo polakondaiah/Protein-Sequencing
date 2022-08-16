@@ -54,17 +54,13 @@ Returns: dict mapping strs to strs
 def makeCodonDictionary(filename):
     import json
     f = open(filename)
-    data = json.load(f)    
-    ends = [ "UAA", "UAG", "UGA" ]   
+    data = json.load(f)     
     codon = {}
     for i,j in data.items():        
         for k in j:
             if "T" in k: 
                 k = k.replace("T","U")
-            codon[k]=i
-            if k in ends:
-                break     
-    
+            codon[k]=i            
     return codon
 
 
