@@ -54,17 +54,13 @@ Returns: dict mapping strs to strs
 def makeCodonDictionary(filename):
     import json
     f = open(filename)
-    data = json.load(f)    
-    ends = [ "UAA", "UAG", "UGA" ]   
+    data = json.load(f)  
     codon = {}
     for i,j in data.items():        
         for k in j:
             if "T" in k: 
                 k = k.replace("T","U")
-            codon[k]=i
-            if k in ends:
-                break     
-    
+            codon[k]=i        
     return codon
 
 
@@ -75,20 +71,11 @@ Parameters: list of strs ; dict mapping strs to strs
 Returns: list of strs
 '''
 def generateProtein(codons, codonD): 
-       
-    protein =[]
-    Stop = ['UAA', 'UAG', 'UGA']
-    for i in codons:
-        if i == "AUG" :
-            protein.append("Start")
-            continue
-        if i in Stop:
-            protein.append("Stop")
-            break
+    protein =[]    
+    for i in codons:                   
         protein.append(codonD[i]) 
-               
-        
-    print(protein)   
+        if protein[0]=="Met":
+            protein[0] = "Start" 
     return protein
 
 
