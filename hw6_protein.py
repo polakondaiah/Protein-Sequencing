@@ -31,21 +31,7 @@ Parameters: str ; int
 Returns: list of strs
 '''
 def dnaToRna(dna, startIndex):    
-    dna = dna.replace("T","U")
-    dna = dna[startIndex:]
-    codons = []
-    codon = ""
-    ends = ["UAA", "UAG", "UGA"]
-    for i in dna:
-        codon += i
-        if len(codon)==3:
-            codons.append(codon)
-            if codon in ends:
-                break
-            else:
-                codon = ""                
-    # print(codons)    
-    return codons
+  return
 
 
 '''
