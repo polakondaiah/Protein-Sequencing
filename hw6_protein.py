@@ -20,7 +20,7 @@ def readFile(filename):
     file = open(filename,'r')
     lines = file.read()
     text = lines.replace("\n","")
-    print(len(text))
+    print(len(text))    
     return text
 
 
