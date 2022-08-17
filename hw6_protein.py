@@ -143,7 +143,8 @@ Parameters: list of strs
 Returns: dict mapping strs to ints
 '''
 def aminoAcidDictionary(aaList):
-    return
+    amino = {i:aaList.count(i) for i in aaList }
+    return amino
 
 
 '''
