@@ -17,8 +17,10 @@ Parameters: str
 Returns: str
 '''
 def readFile(filename):
-    return
-
+    file = open(filename,"r")
+    text = file.read()
+    string = text.replace("\n","")    
+    return string
 
 '''
 dnaToRna(dna, startIndex)
@@ -27,7 +29,20 @@ Parameters: str ; int
 Returns: list of strs
 '''
 def dnaToRna(dna, startIndex):
-    return
+    dna = dna.replace("T","U")
+    dna = dna[startIndex:]
+    codon =  ""
+    ends = ["UAA", "UAG", "UGA"]
+    codons = []
+    for i in dna:
+        codon += i
+        if len(codon)==3:
+            codons.append(codon)
+            if codon in ends:
+                break
+            codon = ""
+    return codons
+    
 
 
 '''
@@ -38,7 +53,15 @@ Returns: dict mapping strs to strs
 '''
 def makeCodonDictionary(filename):
     import json
-    return
+    f = open(filename)
+    data = json.load(f)  
+    codon = {}
+    for i,j in data.items():        
+        for k in j:
+            if "T" in k: 
+                k = k.replace("T","U")
+            codon[k]=i        
+    return codon
 
 
 '''
@@ -47,8 +70,13 @@ generateProtein(codons, codonD)
 Parameters: list of strs ; dict mapping strs to strs
 Returns: list of strs
 '''
-def generateProtein(codons, codonD):
-    return
+def generateProtein(codons, codonD): 
+    protein =[]    
+    for i in codons:                   
+        protein.append(codonD[i]) 
+        if protein[0]=="Met":
+            protein[0] = "Start" 
+    return protein
 
 
 '''
@@ -58,7 +86,23 @@ Parameters: str ; str
 Returns: 2D list of strs
 '''
 def synthesizeProteins(dnaFilename, codonFilename):
-    return
+    dna =readFile(dnaFilename)
+    codon = makeCodonDictionary(codonFilename)    
+    synthesize = []
+    index = 0 
+    un_used_bases = 0
+    while index<len(dna):
+        codon1 = dna[index:index+3]
+        if codon1=="ATG":
+            rna = dnaToRna(dna,index)
+            protein = generateProtein(rna,codon)
+            synthesize.append(protein)
+            index += 3*len(protein)
+        else:
+            index += 1
+            un_used_bases += 1  
+    print("total number of bases",len(dna),"unused-base count",un_used_bases,"total number of proteins synthesized",len(synthesize),"\n")                 
+    return synthesize
 
 
 def runWeek1():
@@ -66,7 +110,7 @@ def runWeek1():
     humanProteins = synthesizeProteins("data/human_p53.txt", "data/codon_table.json")
     print("Elephant DNA")
     elephantProteins = synthesizeProteins("data/elephant_p53.txt", "data/codon_table.json")
-
+   
 
 ### WEEK 2 ###
 
