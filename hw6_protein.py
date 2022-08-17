@@ -87,10 +87,10 @@ Returns: 2D list of strs
 '''
 def synthesizeProteins(dnaFilename, codonFilename):
     dna =readFile(dnaFilename)
-    codon = makeCodonDictionary(codonFilename)
-    # index = dna.find("ATG")
+    codon = makeCodonDictionary(codonFilename)    
     synthesize = []
-    # print(index)
+    index = 0 
+    un_used_bases = 0
     while index<len(dna):
         codon1 = dna[index:index+3]
         if codon1=="ATG":
@@ -99,9 +99,10 @@ def synthesizeProteins(dnaFilename, codonFilename):
             synthesize.append(protein)
             index += 3*len(protein)
         else:
-                
-    return
-
+            index += 1
+            un_used_bases += 1  
+    print("total number of bases",len(dna),"unused-base count",un_used_bases,"total number of proteins synthesized",len(synthesize),"\n")                 
+    return synthesize
 
 def runWeek1():
     print("Human DNA")
