@@ -186,6 +186,26 @@ Parameters: 2D list of strs ; 2D list of values
 Returns: None
 '''
 def displayTextResults(commonalities, differences):
+    list1=[]
+    for i in commonalities:
+        i.remove("Start")
+        i.remove("Stop")
+        if len(i)>1:
+            new='-'.join(i)
+            list1.append([new])
+        else:
+            if i not in list1:
+                list1.append(i)
+    new=sorted(list1)
+    print("The following proteins occurred in both DNA Sequences:","\n")
+    for i in new:
+        for j in i:
+            print(j)
+    print("\n")
+    print("The following amino acids occurred at very different rates in the two DNA sequences:","\n")
+    for i in differences:
+        print(i[0]+":"+str(round(i[1]*100,2))+"%"+ " in seq1 ,"+str(round(i[2]*100,2))+"%"+"in seq2")
+    print("\n")
     return
 
 
