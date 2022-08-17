@@ -99,10 +99,7 @@ def synthesizeProteins(dnaFilename, codonFilename):
             synthesize.append(protein)
             index += 3*len(protein)
         else:
-            
-            
-    
-    
+                
     return
 
 
@@ -122,6 +119,7 @@ Parameters: 2D list of strs ; 2D list of strs
 Returns: 2D list of strs
 '''
 def commonProteins(proteinList1, proteinList2):
+    
     return
 
 
