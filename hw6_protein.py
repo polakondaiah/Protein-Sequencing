@@ -132,7 +132,7 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def combineProteins(proteinList):
-    # print(sum(proteinList,[]))
+    
     return sum(proteinList,[])
 
 
@@ -153,8 +153,30 @@ findAminoAcidDifferences(proteinList1, proteinList2, cutoff)
 Parameters: 2D list of strs ; 2D list of strs ; float
 Returns: 2D list of values
 '''
-def findAminoAcidDifferences(proteinList1, proteinList2, cutoff):
-    return
+def findAminoAcidDifferences(proteinList1, proteinList2, cutoff):    
+    combine1 = combineProteins(proteinList1)
+    combine2 =  combineProteins(proteinList2)
+    amino1 = aminoAcidDictionary(combine1)
+    amino2 = aminoAcidDictionary(combine2)    
+    unique = list(set(combine1+combine2)) 
+    freq = []   
+    for k in unique:
+        f1=0
+        f2=0        
+        if k!="Start" and k!="Stop":
+            if k in amino1:
+                f1 = amino1[k]/len(combine1)
+            else:
+                f1 = 0
+            if k in amino2:
+                f2 = amino2[k]/len(combine2)
+            else:
+                f2 = 0
+                
+            d = abs(f1-f2)       
+            if d>cutoff:
+                freq.append([k,round(f1,4),round(f2,4)])               
+    return freq
 
 
 '''
