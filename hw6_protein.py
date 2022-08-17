@@ -86,6 +86,23 @@ Parameters: str ; str
 Returns: 2D list of strs
 '''
 def synthesizeProteins(dnaFilename, codonFilename):
+    dna =readFile(dnaFilename)
+    codon = makeCodonDictionary(codonFilename)
+    # index = dna.find("ATG")
+    synthesize = []
+    # print(index)
+    while index<len(dna):
+        codon1 = dna[index:index+3]
+        if codon1=="ATG":
+            rna = dnaToRna(dna,index)
+            protein = generateProtein(rna,codon)
+            synthesize.append(protein)
+            index += 3*len(protein)
+        else:
+            
+            
+    
+    
     return
 
 
