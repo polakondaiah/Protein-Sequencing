@@ -253,9 +253,9 @@ createChart(xLabels, freqList1, label1, freqList2, label2, edgeList=None)
 Parameters: list of strs ; list of floats ; str ; list of floats ; str ; [optional] list of strs
 Returns: None
 '''
-def createChart(xLabels, freqList1, label1, freqList2, label2, edgeList=None):
+def createChart(xLabels, freqList1, label1, freqList2, label2, edgeList="red"):
     import matplotlib.pyplot as plt
-    w = 0.40  # the width of the bars
+    w = 0.40 
 
     plt.bar(xLabels, freqList1, width=-w, align='edge', label=label1,edgecolor=edgeList)
     plt.bar(xLabels, freqList2, width= w, align='edge', label=label2,edgecolor=edgeList)
@@ -276,7 +276,10 @@ Parameters: list of strs ; 2D list of values
 Returns: list of strs
 '''
 def makeEdgeList(labels, biggestDiffs):
-    return
+    diff = [i[0] for i in biggestDiffs]
+    edge = ["black" if i in diff else "white"for i in labels ]
+    
+    return edge
 
 
 '''
